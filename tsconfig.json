@@ -10,7 +10,11 @@
 		"sourceMap": true,
 		"strict": true,
 		"moduleResolution": "bundler"
-	}
+	},
+	// "include": [
+	// 	"**/*.ts"
+	//   ],
+	//   "exclude":[".svelte-kit/../node_modules/**",".svelte-kit/../src/service-worker.js",".svelte-kit/../src/service-worker/**/*.js",".svelte-kit/../src/service-worker.ts",".svelte-kit/../src/service-worker/**/*.ts",".svelte-kit/../src/service-worker.d.ts",".svelte-kit/../src/service-worker/**/*.d.ts"]
 	// Path aliases are handled by https://svelte.dev/docs/kit/configuration#alias
 	// except $lib which is handled by https://svelte.dev/docs/kit/configuration#files
 	//

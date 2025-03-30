@@ -3,7 +3,7 @@ import type { Actions, PageServerLoad } from './$types';
 import { lucia } from "$lib/server/lucia_auth";
 import { fail, redirect } from "@sveltejs/kit";
 import { verify } from "@node-rs/argon2";
-import { hash } from "@node-rs/argon2";
+//import { hash } from "@node-rs/argon2";
 import { eq } from 'drizzle-orm'
 import { db } from "$lib/server/db";
 import * as table from '$lib/server/db/schema'
@@ -64,5 +64,21 @@ export const actions: Actions = {
                 message: "Incorrect username or password"
             });
         }
+
+        const  expiresAt = Date.now() + 30 * 24 * 60 * 60 * 1000;
+        const session = await lucia.createSession(existingUser.id, expiresAt);
+       // console.log('signIn-session', session)
+
+		const sessionCookie = lucia.createSessionCookie(session.id);
+        // console.log('signIn-sessionCookie', sessionCookie)
+        // console.log(sessionCookie.attributes)
+        // console.log(sessionCookie.serialize())
+        //Проверка: удалить cookie, и сессию в таблице -> залогиниться
+
+		event.cookies.set(sessionCookie.name, sessionCookie.value, {
+			path: ".",
+			...sessionCookie.attributes
+		});
+
     }
 }

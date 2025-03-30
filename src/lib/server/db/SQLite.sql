@@ -1,3 +1,6 @@
 -- SQLite
-delete from session;
-delete from user;
+select * from session;
+select * from user;
+
+--delete from session;
+--delete from user;

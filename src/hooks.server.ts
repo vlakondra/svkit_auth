@@ -1,17 +1,18 @@
 import type { Handle } from '@sveltejs/kit';
 //import * as auth from '$lib/server/auth.js';
 
-import {lucia} from '$lib/server/lucia_auth'
+import { lucia } from '$lib/server/lucia_auth'
 
 const handleAuth: Handle = async ({ event, resolve }) => {
 	const sessionId = event.cookies.get(lucia.sessionCookieName);
 	//old const sessionToken = event.cookies.get(auth.sessionCookieName);
-	
-	console.log(event.locals.session, event.locals.user,  sessionId, lucia.sessionCookieName);
-	
-if (!sessionId) {
+
+	console.log(event.locals.session, event.locals.user, sessionId, lucia.sessionCookieName);
+
+	if (!sessionId) {
 		event.locals.user = null;
 		event.locals.session = null;
+		console.log('проверка logout')
 		return resolve(event);
 	}
 
@@ -34,7 +35,7 @@ if (!sessionId) {
 	}
 	event.locals.user = user;
 	event.locals.session = session;
-	console.log('fin',event.locals.user,event.locals.session)
+	console.log('fin', event.locals.user, event.locals.session)
 	return resolve(event);
 
 };
