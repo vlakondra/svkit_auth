@@ -14,6 +14,4 @@
 	<div><SignoutForm /></div>
 {/if}
 
-<h1>{data.user?.username}</h1>
-<h1>{data.user?.id}</h1>
-<h1>{data.session?.expiresAt}</h1>
+

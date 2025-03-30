@@ -23,8 +23,9 @@ export const lucia = new Lucia(adapter, {
     getUserAttributes: (attributes) => {
         return {
             // attributes has the type of DatabaseUserAttributes
+            //в рез-те на странице можно увидеть только username,
+            //а остальные поля - нет
             username: attributes.username,
-
         };
     },
     //name: 'auth_session'
