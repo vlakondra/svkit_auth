@@ -1,18 +1,15 @@
 import type { Actions, PageServerLoad } from './$types';
-
 import { lucia } from "$lib/server/lucia_auth";
 import { fail, redirect } from "@sveltejs/kit";
 import { generateIdFromEntropySize } from "lucia";
 import { hash } from "@node-rs/argon2";
-
+import {eq} from "drizzle-orm"
 import { db } from "$lib/server/db";
 import * as table from '$lib/server/db/schema'
-//import { TableAliasProxyHandler } from 'drizzle-orm';
 
-export const load = (async () => {
-    return {};
-}) satisfies PageServerLoad;
 
+//код взят: https://v3.lucia-auth.com/tutorials/username-and-password/sveltekit
+//Action формы регистрации
 export const actions: Actions = {
     register: async (event) => {
         const formData = await event.request.formData();
@@ -30,6 +27,18 @@ export const actions: Actions = {
                 message: "Invalid username"
             });
         }
+        //запрет на 2 одинаковых имени
+        const currUser = db
+        .select()
+        .from(table.user)
+        .where(eq(table.user.username, username))
+        .get();
+
+        if(currUser){
+            return fail(400, {
+                message: `Пользователь ${username} уже существует`
+            }); 
+        }
 
         if (typeof password !== "string" || password.length < 6 || password.length > 255) {
             return fail(400, {
@@ -45,8 +54,7 @@ export const actions: Actions = {
             outputLen: 32,
             parallelism: 1
         });
-        console.log('before insert', userId)
-        // TODO: check if username is already used
+        
         await db.insert(table.user).values({
             id: userId,
             username: username,
