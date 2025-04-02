@@ -5,7 +5,7 @@ const productPrices = {
 };
 
 const getPrice = (productName) => {
-   return productPrices[productName];
+    return productPrices[productName];
 };
 //что будет выведено?
 console.log(getPrice('zzzz'))
@@ -23,7 +23,7 @@ const searchParams = new URLSearchParams(window.location.search);
 
 const id = searchParams.get("id");
 
-console.log(id?.toUpperCase());
+console.log(id.toUpperCase());
 
 //--------------------------
 const somethingDangerous = () => {
@@ -40,4 +40,17 @@ try {
 //----------------------------
 class User {
     private username;
-  }
+}
+//---------------------------
+
+// const albumAwards = {};
+
+
+
+const albumAwards: {
+    [key2: number]: boolean;
+} = {};
+albumAwards[10] = true;
+albumAwards[20] = false;
+let b = albumAwards[20]
+console.log(albumAwards)

@@ -13,3 +13,7 @@
     Исправляется, если в schema.ts в строке
     ...expiresAt: integer('expires_at', { mode: 'timestamp' })
     убрать { mode: 'timestamp' } (не ясно, насколько она нужна)
+
+
+2 БД
+>npx drizzle-kit pull --config=drizzle-chinook.config.ts
