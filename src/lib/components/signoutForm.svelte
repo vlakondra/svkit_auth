@@ -20,7 +20,7 @@
             console.error('Error:', error);
             //window.location.href = '/'; // если ошибка - вручную
             }
-        
+       
     }
 </script>
 

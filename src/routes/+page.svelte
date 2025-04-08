@@ -1,5 +1,7 @@
 <script lang='ts'>
  	let { data } = $props();
+	 import type { HTMLButtonAttributes } from 'svelte/elements';
+	 import type { Snippet } from 'svelte';
 //корневая страница может получить данные от +layout.server.js
 </script>
 

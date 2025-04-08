@@ -11,3 +11,5 @@ if (!env.CHINOOK_URL) throw new Error('CHINOOK_URL is not set');
 const client = new Database(env.CHINOOK_URL);
 
 export const chinookdb = drizzle(client, { schema:{...schema,...relations }});
+export const albums = schema.albums 
+export const artists = schema.artists
