@@ -6,17 +6,15 @@ import { artists, albums } from '$lib/server/chinook/schema';
 import { sql, eq } from 'drizzle-orm';
 
 export const load = (async () => {
-    return {};
+    return {something:333};
 }) satisfies PageServerLoad;
-
-
 
 export const actions = {
     create: async ({ request }) => {
 
         const data = await request.formData();
         const art: string = data.get('artist')
-        const alb: string = data.get('album')
+        const alb: FormDataEntryValue | null = data.get('album')
 
         try {
             const artId = await chinookdb
@@ -25,12 +23,13 @@ export const actions = {
                 .where(eq(artists.name, art))
 
             console.log(artId[0].artistId)
+
             if (artId[0]?.artistId) {
                 await chinookdb
                     .insert(albums)
                     .values({ title: alb, artistId: artId[0].artistId });
             }
-            return { message: 'Album created' }
+            return { message: 'Альбом добавлен' }
 
         } catch (error) {
             return fail(422, {

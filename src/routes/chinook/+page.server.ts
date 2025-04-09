@@ -31,11 +31,6 @@ export const load = (async () => {
         with: {albums: true}
     });
 
-
-
-    // const result = await chinookdb.query.albums.findMany({
-    //      with: { tracks: true }, 
-
     console.log(result3)
     return { result3 };
 }) satisfies PageServerLoad;
