@@ -9,13 +9,16 @@ import htmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker';
 import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker';
 import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker';
 
+import 'monaco-editor/esm/vs/basic-languages/sql/sql.contribution';
+
 //import pyWorker from 'monaco-editor/esm/vs/basic-languages/python/ts.worker?worker';
 //import pyW from 'monaco-editor/esm/vs/basic-languages/python/python.worker?worker';
 //import { language as py } from 'monaco-editor/esm/vs/basic-languages/python/python';
-import {language as sqlLanguage } from 'monaco-editor/esm/vs/basic-languages/sql/sql.js';
+//import {language as sqlLanguage } from 'monaco-editor/esm/vs/basic-languages/sql/sql.js';
 
 self.MonacoEnvironment = {
 	getWorker: function (_: string, label: string) {
+		console.log('self...',label)
 		switch (label) {
 			case 'json':
 				return new jsonWorker();
@@ -31,7 +34,8 @@ self.MonacoEnvironment = {
 			case 'javascript':
 				return new tsWorker();
 			case 'sql':
-					return new tsWorker();	
+				return new Worker(new URL('./sql.worker.js', import.meta.url));
+					//return new tsWorker();	
 			default:
 				return new editorWorker();
 		}

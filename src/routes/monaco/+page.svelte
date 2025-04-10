@@ -12,19 +12,19 @@
 		monaco = (await import('../../monaco-edit')).default;
 
 		// Your monaco instance is ready, let's display some code!
-		const editor = monaco.editor.create(editorContainer,
-		{automaticLayout:true,
-			theme:'vs-dark',
-			lineNumbers:'on',
-			language:'javascript'
+		const editor = monaco.editor.create(editorContainer, {
+			automaticLayout: true,
+			theme: 'vs-dark',
+			lineNumbers: 'on',
 		});
-		
+
 		const model = monaco.editor.createModel(
-			"console.log('Hello from Monaco! (the editor, not the city...)')",
-			'javascript'
-			
+			"selecrt * from table",
+			'sql'
 		);
 		editor.setModel(model);
+		editor.onDidChangeModelContent((e)=>console.log(editor.getValue()))
+
 	});
 
 	onDestroy(() => {
@@ -34,13 +34,8 @@
 </script>
 
 <div>
-	<p class="container h-lvh" bind:this={editorContainer} ></p>
+	<p class="container h-lvh" bind:this={editorContainer}></p>
 </div>
-
-<style>
-
-</style>
-
 
 <!-- <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
@@ -99,3 +94,6 @@
 <div>
 	<div class="flex-grow" bind:this={editorElement}></div>
 </div> -->
+
+<style>
+</style>
