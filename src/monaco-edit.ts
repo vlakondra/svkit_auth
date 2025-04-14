@@ -31,7 +31,8 @@ self.MonacoEnvironment = {
 			case 'javascript':
 				return new tsWorker();
 			case 'sql':
-					return new tsWorker();	
+					return new Worker(new URL('./sql.worker.js', import.meta.url));
+					//new tsWorker();	
 			default:
 				return new editorWorker();
 		}
