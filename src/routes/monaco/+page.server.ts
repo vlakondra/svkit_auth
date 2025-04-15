@@ -1,5 +1,12 @@
 import type { PageServerLoad } from './$types';
 
 export const load = (async () => {
-    return {};
+    return {message:123};
 }) satisfies PageServerLoad;
+
+
+export const actions = {
+    create: async ({ request }) => {
+
+        return {message:'test'}
+    }}

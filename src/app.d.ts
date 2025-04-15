@@ -10,6 +10,6 @@ declare global {
 }
 
 //?
-declare module 'monaco-editor/esm/vs/basic-languages/sql/sql.js';
-
+//declare module 'monaco-editor/esm/vs/basic-languages/sql/sql.js';
+//declare module 'monaco-editor/esm/vs/basic-languages/sql/sql';
 export {};
